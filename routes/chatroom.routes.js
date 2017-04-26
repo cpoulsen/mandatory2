@@ -18,5 +18,15 @@ router.post('/post', function(req, res, next) {
     });
 });
 
+router.get('/get', function(req, res, next) {
+    schema.ChatRoom.find({}).exec(function (err, chatRooms) {
+        if (err)
+            return console.error(err);
+        console.log("Load success: ", chatRooms);
+        res.send(chatRooms);
+    });
+
+});
+
 //export the router
 module.exports = router;

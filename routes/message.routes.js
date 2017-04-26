@@ -18,5 +18,15 @@ router.post('/post', function(req, res, next) {
     });
 });
 
+router.get('/get', function(req, res, next) {
+    schema.Message.find({}).exec(function (err, messages) {
+        if (err)
+            return console.error(err);
+        console.log("Load success: ", messages);
+        res.send(messages);
+    });
+
+});
+
 //export the router
 module.exports = router;
