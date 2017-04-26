@@ -1,31 +1,26 @@
-<h1>
-  {{title}}
-</h1>
 
-<hr>
-
-<h2>Create new blog message</h2>
-<form (ngSubmit)="submitBlog()">
-  <div class="form-group">
-    <label for="author">Author</label>
-    <input type="text"  class="form-control" id="author"
-           required
-           [(ngModel)]="model.author" name="author">
+<div class="container-fluid" id="indexContainer">
+  <div class="row text-center">
+    <div class="col-md-2 col-md-offset-5">
+      <h1>Register user</h1>
+      <div id="userSubmitForm">
+        <div class="input-group">
+          <input type="text" class="form-control" id="username" placeholder="Username">
+          <span class="input-group-btn">
+            <input class="btn btn-success" id="login-btn" type="button" onclick="addUser()" value="Join"/>
+          </span>
+        </div>
+      </div>
+      <p id="seperator">Or</p>
+      <h2>Login</h2>
+      <div id="userSubmitForm">
+        <div class="input-group">
+          <input type="text" class="form-control" id="loginUser" placeholder="Username">
+          <span class="input-group-btn">
+            <input class="btn btn-success" id="login-btn" type="button" onclick="loginUser()" value="Login"/>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="body">Body</label>
-    <input type="text" class="form-control" id="body"
-           required
-           [(ngModel)]="model.body" name="body">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-
-<hr>
-
-<h2>All blog messages</h2>
-<ul>
-  <li *ngFor="let message of blogMessages">
-    {{message.author}} : "{{message.body}}"
-  </li>
-</ul>
+</div>

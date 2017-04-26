@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var blog = require('./routes/blog');
 var user = require('./routes/user.routes');
 var message = require('./routes/message.routes');
 var chatroom = require('./routes/chatroom.routes');
@@ -24,7 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-app.use('/blog', blog);
 app.use('/user', user);
 app.use('/message', message);
 app.use('/chatroom', chatroom);
