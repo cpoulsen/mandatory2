@@ -21,6 +21,6 @@ import { ChatComponent } from './chat/chat.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
