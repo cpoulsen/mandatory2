@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { ChatComponent } from './chat/chat.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +18,7 @@ import { ChatComponent } from './chat/chat.component';
     ChatComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule
