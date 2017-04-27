@@ -7,6 +7,7 @@ import {User} from "./login/user.model";
 @Injectable()
 export class UserService {
     private getUsersUrl = 'user/get';  // URL to web API
+    private postUsersUrl = 'user/post';  // URL to web API
     constructor (private http: Http) {}
 
     /*
@@ -14,6 +15,15 @@ export class UserService {
      */
     getUsersFromServer(): Observable<User[]> {
         return this.http.get(this.getUsersUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    addUser (user: User): Observable<User> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.postUsersUrl, user, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

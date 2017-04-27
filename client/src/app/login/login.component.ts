@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   private users: User[] = [];
   public userList = this.users;
+  title = 'MEAN app with Angular2';
+  model = new User("");
 
   constructor(
       private service: UserService
@@ -35,7 +37,18 @@ export class LoginComponent implements OnInit {
     return this.users;
   }
 
-  checkLogin(username, password) {
+    addUser() {
+        this.service.addUser(this.model)
+            .subscribe(
+                user => {
+                    this.model = user;
+                    this.getUsers();
+                },
+                error =>  this.title = <any>error
+            );
+    }
+
+/*  checkLogin(username, password) {
     console.log("Subscribe to service");
     this.service.getUsersFromServer()
         .subscribe(
@@ -46,7 +59,7 @@ export class LoginComponent implements OnInit {
             error =>  this.users = <any>error
         );
     return;
-  }
+  }*/
 
   ngOnInit() {
     this.getUsers();
