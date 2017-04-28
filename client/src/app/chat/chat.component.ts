@@ -38,6 +38,7 @@ export class ChatComponent implements OnInit {
   }
 
   addChatMessage() {
+    this.resetModel(this.model, this.model.message, this.model.author, this.model.roomName);
     this.service.addChatMessage(this.model)
         .subscribe(
             user => {
@@ -47,6 +48,11 @@ export class ChatComponent implements OnInit {
             error =>  this.title = <any>error
         );
   }
+
+  resetModel(chatModel, chatModelMessage, chatModelAuthor, chatModelRoomname) {
+    chatModel= new Chat(chatModelMessage, chatModelAuthor, chatModelRoomname)
+    this.model = chatModel
+    }
 
   ngOnInit() {
     this.getChatMessages();

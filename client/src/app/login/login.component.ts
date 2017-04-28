@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
     addUser() {
+        this.resetModel(this.model, this.model.username);
         this.service.addUser(this.model)
             .subscribe(
                 user => {
@@ -47,6 +48,11 @@ export class LoginComponent implements OnInit {
                 },
                 error =>  this.title = <any>error
             );
+    }
+
+    resetModel(userModel, userModelUsername) {
+        userModel= new User(userModelUsername)
+        this.model = userModel
     }
 
 /*  checkLogin(username, password) {

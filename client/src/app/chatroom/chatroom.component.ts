@@ -50,9 +50,9 @@ export class ChatroomComponent implements OnInit {
   }
 
 
-  //This method is needed to prevent the _id from MongoDb to be attacted to the model object.
-  resetModel(chatroomModel, chatroomModelNameOnly) {
-    chatroomModel= new Chatroom(chatroomModelNameOnly)
+  //This method is needed to prevent the _id from MongoDb to be attached to the model object.
+  resetModel(chatroomModel, chatroomModelRoomName) {
+    chatroomModel= new Chatroom(chatroomModelRoomName)
     this.model = chatroomModel
   }
 
