@@ -1,7 +1,16 @@
+<h2>Users Online</h2>
+<ul>
+  <li *ngFor="let user of users">
+    {{user.username}}
+  </li>
+</ul>
+
+
+
 <div class="container-fluid" id="indexContainer">
   <div class="row text-center">
     <div class="col-md-8 offset-md-2">
-      <h1 class="h1-custom">Register user</h1>
+      <h1 class="h1-custom">Login</h1>
       <div id="userSubmitForm">
         <form (ngSubmit)="addUser()" class="form-horizontal">
           <div class="form-group">
@@ -10,30 +19,14 @@
               <input type="text" class="form-control" id="author" required [(ngModel)]="model.username" name="username"
                      placeholder="Username">
               <span class="input-group-btn">
-            <input class="btn btn-success" id="login-btn" type="submit" value="Create User"/>
+            <input class="btn btn-success" id="login-btn" type="submit" value="Login"/>
           </span>
             </div>
           </div>
         </form>
-      </div>
-      <p id="seperator">Or</p>
-      <h2>Login</h2>
-      <div id="userSubmitForm">
-        <div class="input-group">
-          <input type="text" class="form-control" id="loginUser" placeholder="Username">
-          <span class="input-group-btn">
-            <input class="btn btn-success" id="login-btn" type="button" onclick="loginUser()" value="Login"/>
-          </span>
-        </div>
       </div>
     </div>
   </div>
 </div>
 
 
-<h2>Users Online</h2>
-<ul>
-  <li *ngFor="let user of users">
-    {{user.username}}
-  </li>
-</ul>

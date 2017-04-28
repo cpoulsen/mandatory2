@@ -1,35 +1,16 @@
-
-<div class="container-fluid" id="">
-  <div class="row text-center">
-    <div class="col-md-2 col-md-offset-5">
-      <h1>Create a new chatroom:</h1>
-      <div id="chatroomSubmitForm">
-        <div class="input-group">
-          <input type="text" class="form-control" id="roomname" placeholder="Roomname">
-          <span class="input-group-btn">
-            <input class="btn btn-success" id="login-btn" type="button" onclick="addChatroom()" value="Join"/>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <div class="container-fluid" id="indexContainer">
   <div class="row text-center">
     <div class="col-md-2 col-md-offset-5">
       <h2>Chatrooms:</h2>
       <ul>
-        <li *ngFor="let chatroom of chatrooms">
-          {{chatroom.roomName}}
+        <li *ngFor="let chatroom of chatrooms">{{chatroom.roomName}}
         </li>
       </ul>
     </div>
   </div>
 </div>
 
-<h2>Create new blog message</h2>
+<h2>Create new Chatroom</h2>
 <form (ngSubmit)="addChatroom()">
   <div class="form-group">
     <label for="chatroom">Chatroom</label>
