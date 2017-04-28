@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'chatroom', component: ChatroomComponent },
+  {path: 'chatroom/:selectChatroom', component: ChatComponent},
   { path: 'chat', component: ChatComponent },
 ];
 

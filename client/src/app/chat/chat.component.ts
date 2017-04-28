@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Chat} from './chat.model';
 import {ChatService} from './../chat.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -16,15 +18,19 @@ export class ChatComponent implements OnInit {
   private chatMessages: Chat[] = [];
   title = 'MEAN app with Angular2';
   model = new Chat("", "", "");
+  selectedChatRoom: string;
 
   constructor(
-      private service: ChatService
+      private service: ChatService,
+      private route: ActivatedRoute,
+      private router: Router,
       /*private logger: Logger*/) {
   }
 
-  getChatMessages() {
+  getChatMessages(selectedChatRoom) {
+    console.log(selectedChatRoom);
     console.log("Subscribe to service");
-    this.service.getChatMessagesFromServer()
+    this.service.getChatMessagesFromServer(selectedChatRoom)
         .subscribe(
             listOfChatMessages => {
               //console.log("Messages:",messages);
@@ -37,13 +43,14 @@ export class ChatComponent implements OnInit {
     return this.chatMessages;
   }
 
+
   addChatMessage() {
     this.resetModel(this.model, this.model.message, this.model.author, this.model.roomName);
     this.service.addChatMessage(this.model)
         .subscribe(
             user => {
               this.model = user;
-              this.getChatMessages();
+              this.getChatMessages(this.model.roomName);
             },
             error =>  this.title = <any>error
         );
@@ -55,7 +62,11 @@ export class ChatComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.getChatMessages();
+    console.log(this.route.params);
+    this.route.params.subscribe((params: Params) => {
+      this.selectedChatRoom = params['selectChatroom'];
+      console.log(this.selectedChatRoom);
+    });
+          this.getChatMessages(this.selectedChatRoom);
   }
-
 }

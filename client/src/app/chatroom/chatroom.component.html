@@ -3,8 +3,11 @@
     <div class="col-md-2 col-md-offset-5">
       <h2>Chatrooms:</h2>
       <ul>
-        <li *ngFor="let chatroom of chatrooms">{{chatroom.roomName}}
+        <li *ngFor="let chatroom of chatrooms">
+          <a [routerLink]="[chatroom.roomName]" routerLinkActive="active">{{chatroom.roomName}}</a>
+
         </li>
+        <router-outlet></router-outlet>
       </ul>
     </div>
   </div>

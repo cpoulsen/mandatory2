@@ -13,7 +13,8 @@ export class ChatService {
     /*
      * Get blog messages from server
      */
-    getChatMessagesFromServer(): Observable<Chat[]> {
+    getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
+        this.getChatUrl = 'message/get/'+selectedChatRoom
         return this.http.get(this.getChatUrl)
             .map(this.extractData)
             .catch(this.handleError);

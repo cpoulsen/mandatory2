@@ -17,7 +17,7 @@ export class ChatroomComponent implements OnInit {
 
 
   constructor(
-      private service: ChatroomService
+      private service: ChatroomService,
       /*private logger: Logger*/) {
   }
 
@@ -58,6 +58,7 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit() {
     this.getChatrooms();
+    
   }
 
 }

@@ -25,6 +25,15 @@ router.get('/get', function(req, res, next) {
         console.log("Load success: ", messages);
         res.send(messages);
     });
+});
+
+router.get('/get/:roomName', function(req, res, next) {
+    schema.Message.find({roomName: req.params.roomName}).exec(function (err, messages) {
+        if (err)
+            return console.error(err);
+        console.log("Load success: ", messages);
+        res.send(messages);
+    });
 
 });
 
