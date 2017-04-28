@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
@@ -25,7 +26,7 @@ const routes: Routes = [
     ChatComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
     NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
