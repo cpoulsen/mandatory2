@@ -15,6 +15,7 @@ export class ChatroomComponent implements OnInit {
   title = 'MEAN app with Angular2';
   model = new Chatroom("");
 
+
   constructor(
       private service: ChatroomService
       /*private logger: Logger*/) {
@@ -25,10 +26,7 @@ export class ChatroomComponent implements OnInit {
     this.service.getChatroomsFromServer()
         .subscribe(
             listOfChatrooms => {
-              //console.log("Messages:",messages);
               this.chatrooms = listOfChatrooms;
-              console.log(this.chatrooms);
-              console.log(this.chatrooms);
             },
             error =>  this.chatrooms = <any>error
         );
@@ -36,28 +34,27 @@ export class ChatroomComponent implements OnInit {
   }
 
   addChatroom() {
+    console.log("-----------------------BEFORE RESET -------------------------------------- ");
+    console.log(this.model);
+    this.resetModel(this.model, this.model.roomName);
+    console.log("-----------------------AFTER RESET -------------------------------------- ");
+    console.log(this.model);
     this.service.addChatroom(this.model)
         .subscribe(
-            user => {
-              this.model = user;
+            chatroom => {
+              this.model = chatroom;
               this.getChatrooms();
             },
-            error =>  this.title = <any>error
+            error => this.title = <any>error
         );
   }
 
-  /*  checkLogin(username, password) {
-   console.log("Subscribe to service");
-   this.service.getUsersFromServer()
-   .subscribe(
-   listOfUsers => {
-   //console.log("Messages:",messages);
-   this.users = listOfUsers;
-   },
-   error =>  this.users = <any>error
-   );
-   return;
-   }*/
+
+  //This method is needed to prevent the _id from MongoDb to be attacted to the model object.
+  resetModel(chatroomModel, chatroomModelNameOnly) {
+    chatroomModel= new Chatroom(chatroomModelNameOnly)
+    this.model = chatroomModel
+  }
 
   ngOnInit() {
     this.getChatrooms();
