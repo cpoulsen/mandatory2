@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Chatroom} from './chatroom.model';
 import {ChatroomService} from './../chatroom.service';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -14,7 +15,6 @@ export class ChatroomComponent implements OnInit {
   private chatrooms: Chatroom[] = [];
   title = 'MEAN app with Angular2';
   model = new Chatroom("");
-
 
   constructor(
       private service: ChatroomService,
@@ -48,7 +48,6 @@ export class ChatroomComponent implements OnInit {
             error => this.title = <any>error
         );
   }
-
 
   //This method is needed to prevent the _id from MongoDb to be attached to the model object.
   resetModel(chatroomModel, chatroomModelRoomName) {
