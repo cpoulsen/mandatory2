@@ -32,5 +32,22 @@ router.get('/get', function(req, res, next) {
 
 });
 
+router.clients = [];
+router.addClient = function (client) {
+    router.clients.push(client);
+    router.notifyclients(client);
+};
+
+router.notifyclients = function (client) {
+    schema.User.find({}).exec(function (err, users) {
+        if (err)
+            return console.error(err);
+        var toNotify = client?new Array(client):router.clients;
+        toNotify.forEach(function(socket){
+            socket.emit('refresh', users);
+        })
+    });
+}
+
 //export the router
 module.exports = router;

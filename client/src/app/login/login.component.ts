@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   getUsers() {
-    console.log("Subscribe to service");
     this.service.getUsersFromServer()
         .subscribe(
             listOfUsers => {
