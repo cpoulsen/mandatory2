@@ -37,5 +37,22 @@ router.get('/get/:roomName', function(req, res, next) {
 
 });
 
+router.clients = [];
+router.addMessage = function (client) {
+    router.clients.push(client);
+    router.notifyclients(client);
+};
+
+router.notifyclients = function (client) {
+    schema.Message.find({}).exec(function (err, messages) {
+        if (err)
+            return console.error(err);
+        var toNotify = client?new Array(client):router.clients;
+        toNotify.forEach(function(socket){
+            socket.emit('refreshMessages', messages);
+        })
+    });
+}
+
 //export the router
 module.exports = router;

@@ -82,6 +82,8 @@ server.on('error', onError);
  user.notifyclients();
  chatroom.addChatroom(socket);
  chatroom.notifyclients();
+ message.addMessage(socket);
+ message.notifyclients();
  });
 
  server.on('listening', onListening);
