@@ -75,14 +75,14 @@ var io = socketio(server);
 
 server.listen(port);
 server.on('error', onError);
-/*
-io.on('connection', function (socket) {
-    console.log("New client connected");
-    blog.addClient(socket);
-    blog.notifyclients();
-});
-server.on('listening', onListening);
-*/
+
+ io.on('connection', function (socket) {
+ console.log("New client connected");
+ user.addClient(socket);
+ user.notifyclients();
+ });
+ server.on('listening', onListening);
+
 
 /**
  * Normalize a port into a number, string, or false.
