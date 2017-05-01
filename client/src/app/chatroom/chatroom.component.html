@@ -3,7 +3,7 @@
     <h2>Chatrooms:</h2>
     <div class="list-group">
       <button type="button" class="list-group-item" *ngFor="let chatroom of chatrooms">
-        <a [routerLink]="[chatroom.roomName]" routerLinkActive="active">{{chatroom.roomName}}</a>
+        <a [routerLink]="[chatroom.roomName]" (click)="switchRoom(chatroom.roomName)" routerLinkActive="active">{{chatroom.roomName}}</a>
       </button>
     </div>
     <router-outlet></router-outlet>

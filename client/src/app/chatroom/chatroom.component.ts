@@ -4,6 +4,8 @@ import {ChatroomService} from './../chatroom.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import * as io from 'socket.io-client';
+
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
@@ -15,6 +17,7 @@ export class ChatroomComponent implements OnInit {
   private chatrooms: Chatroom[] = [];
   title = 'MEAN app with Angular2';
   model = new Chatroom("");
+  socket;
 
   constructor(
       private service: ChatroomService,
@@ -34,11 +37,11 @@ export class ChatroomComponent implements OnInit {
   }
 
   addChatroom() {
-    console.log("-----------------------BEFORE RESET -------------------------------------- ");
-    console.log(this.model);
+    //console.log("-----------------------BEFORE RESET -------------------------------------- ");
+    //console.log(this.model);
     this.resetModel(this.model, this.model.roomName);
-    console.log("-----------------------AFTER RESET -------------------------------------- ");
-    console.log(this.model);
+    //console.log("-----------------------AFTER RESET -------------------------------------- ");
+    //console.log(this.model);
     this.service.addChatroom(this.model)
         .subscribe(
             chatroom => {
@@ -55,8 +58,16 @@ export class ChatroomComponent implements OnInit {
     this.model = chatroomModel
   }
 
+  switchRoom(roomName) {
+      console.log("switchroom frontend");
+      this.socket.emit('switchRoom', roomName);
+      this.socket.join(roomName);
+  }
+
   ngOnInit() {
     this.getChatrooms();
+    this.socket = io.connect(window.location.origin);
+
     
   }
 
