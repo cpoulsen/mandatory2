@@ -1,3 +1,25 @@
-<p>
-  chatroom works!
-</p>
+<div class="container-fluid" id="indexContainer">
+  <div class="row text-center">
+    <div class="col-md-2 col-md-offset-5">
+      <h2>Chatrooms:</h2>
+      <ul>
+        <li *ngFor="let chatroom of chatrooms">
+          <a [routerLink]="[chatroom.roomName]" routerLinkActive="active">{{chatroom.roomName}}</a>
+
+        </li>
+        <router-outlet></router-outlet>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2>Create new Chatroom</h2>
+<form (ngSubmit)="addChatroom()">
+  <div class="form-group">
+    <label for="chatroom">Chatroom</label>
+    <input type="text"  class="form-control" id="chatroom"
+           required
+           [(ngModel)]="model.roomName" name="Roomname">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
