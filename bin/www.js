@@ -80,7 +80,10 @@ server.on('error', onError);
  console.log("New client connected");
  user.addClient(socket);
  user.notifyclients();
+ chatroom.addChatroom(socket);
+ chatroom.notifyclients();
  });
+
  server.on('listening', onListening);
 
 

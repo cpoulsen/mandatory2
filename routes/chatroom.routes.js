@@ -28,5 +28,23 @@ router.get('/get', function(req, res, next) {
 
 });
 
+router.clients = [];
+router.addChatroom = function (client) {
+    router.clients.push(client);
+    router.notifyclients(client);
+};
+
+
+router.notifyclients = function (client) {
+    schema.ChatRoom.find({}).exec(function (err, chatRooms) {
+        if (err)
+            return console.error(err);
+        var toNotify = client?new Array(client):router.clients;
+        toNotify.forEach(function(socket){
+            socket.emit('refreshChat', chatRooms);
+        })
+    });
+}
+
 //export the router
 module.exports = router;
