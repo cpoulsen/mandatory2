@@ -5,7 +5,7 @@ import {Chat} from './chat.model';
 import {ChatService} from './../chat.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Chatroom} from "../chatroom/chatroom.model";
-import {ChatroomService} from "../chatroom.service";
+import {ChatroomService} from "../chatroom.service.obsolete";
 
 @Component({
   selector: 'app-chat',

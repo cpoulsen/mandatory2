@@ -3,15 +3,19 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { Chat } from "./chat/chat.model";
+import { Chatroom } from "./chatroom/chatroom.model";
 import * as io from 'socket.io-client';
 
 @Injectable()
 export class ChatService {
     private getChatUrl = 'message/get';  // URL to web API
     private postChatUrl = 'message/post';  // URL to web API
+    private getChatroomsUrl = 'chatroom/get';  // URL to web API
+    private postChatroomUrl = 'chatroom/post';  // URL to web API
     constructor (private http: Http) {}
     private url = window.location.origin;
     private socket = io(this.url);
+
 
 
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
@@ -42,6 +46,31 @@ export class ChatService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.postChatUrl, chat, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getChatroomsFromServer(): Observable<Chatroom[]> {
+        let observable = new Observable(observer => {
+            console.log("Socket:",this.url);
+            this.socket = io(this.url);
+            this.socket.on('refreshChat', (data) => {
+                observer.next(data);
+            });
+
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+        return observable;
+    }
+
+
+    addChatroom(chatroom: Chatroom): Observable<Chatroom> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.postChatroomUrl, chatroom, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

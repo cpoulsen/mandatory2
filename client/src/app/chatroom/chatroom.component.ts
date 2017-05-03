@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {Chatroom} from './chatroom.model';
-import {ChatroomService} from './../chatroom.service';
+import {ChatService} from '../chat.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import * as io from 'socket.io-client';
+import {Chat} from "../chat/chat.model";
 
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
   styleUrls: ['./chatroom.component.css'],
-      providers:  [ ChatroomService ]
+      providers:  [ ChatService ]
 })
 export class ChatroomComponent implements OnInit {
 
@@ -20,7 +21,7 @@ export class ChatroomComponent implements OnInit {
   socket;
 
   constructor(
-      private service: ChatroomService,
+      private service: ChatService,
       /*private logger: Logger*/) {
   }
 
