@@ -41,15 +41,11 @@
       <input type="text"  class="form-control" id="name"
              placeholder="Name"
              required
-             [(ngModel)]="model.author" name="Roomname">
-      <input type="text"  class="form-control" id="chatroom"
-             placeholder="Room"
-             required
-             [(ngModel)]="model.roomName" name="Roomname">
+             [(ngModel)]="model.author" name="author">
       <input type="text"  class="form-control" id="chatroom"
              placeholder="Message"
              required
-             [(ngModel)]="model.message" name="Roomname">
+             [(ngModel)]="model.message" name="message">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>

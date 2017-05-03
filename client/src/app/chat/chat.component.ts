@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit {
             listOfChatMessages => {
               //console.log("Messages:",messages);
               this.chatMessages = listOfChatMessages;
-              console.log(this.chatMessages);
+              //console.log(this.chatMessages);
               console.log(this.chatMessages);
             },
             error =>  this.chatMessages = <any>error
@@ -45,12 +45,13 @@ export class ChatComponent implements OnInit {
 
 
   addChatMessage() {
-    this.resetModel(this.model, this.model.message, this.model.author, this.model.roomName);
+    this.resetModel(this.model, this.model.message, this.model.author, this.selectedChatRoom);
+    console.log("Her er modellen: " + this.model);
     this.service.addChatMessage(this.model)
         .subscribe(
             user => {
               this.model = user;
-              this.getChatMessages(this.model.roomName);
+              //this.getChatMessages(this.selectedChatRoom);
             },
             error =>  this.title = <any>error
         );

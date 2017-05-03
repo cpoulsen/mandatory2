@@ -32,11 +32,11 @@ router.get('/get', function(req, res, next) {
 
 });
 
-router.clients = [];
+/*router.clients = [];
 router.addClient = function (client) {
     router.clients.push(client);
     router.notifyclients(client);
-};
+};*/
 
 router.notifyclients = function (client) {
     schema.User.find({}).exec(function (err, users) {

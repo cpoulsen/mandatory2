@@ -10,14 +10,13 @@ export class ChatService {
     private getChatUrl = 'message/get';  // URL to web API
     private postChatUrl = 'message/post';  // URL to web API
     constructor (private http: Http) {}
-    private socket;
     private url = window.location.origin;
+    private socket = io(this.url);
 
 
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
         let observable = new Observable(observer => {
             console.log("Socket:",this.url + selectedChatRoom);
-            this.socket = io(this.url);
             this.socket.on('refreshMessages', (data) => {
                 observer.next(data);
             });

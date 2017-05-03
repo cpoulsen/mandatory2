@@ -10,12 +10,17 @@ var database = require('../model/database');
 /* POST single message */
 router.post('/post', function(req, res, next) {
     var instance = new schema.Message(req.body);
+    console.log("POST");
+    //console.log(instance);
 
     instance.save(function (err, Message) {
+        //console.log("Her er message: "+Message);
         result = err?err:Message;
         res.send(result);
+        router.addMessage(req.body.roomName);
         return result;
     });
+
 });
 
 router.get('/get', function(req, res, next) {
@@ -38,17 +43,24 @@ router.get('/get/:roomName', function(req, res, next) {
 });
 
 router.clients = [];
-router.addMessage = function (client) {
+router.addClient = function (client) {
     router.clients.push(client);
-    router.notifyclients(client);
+    console.log("Clients indeholder: " + router.clients.length);
+    //router.notifyclients(client);
 };
 
-router.notifyclients = function (client) {
-    schema.Message.find({}).exec(function (err, messages) {
+router.addMessage = function (message) {
+    console.log("addMessage " + message);
+    router.notifyclientsMessage(message)
+};
+
+router.notifyclientsMessage = function (message) {
+    console.log("notifyclientsmessage");
+    schema.Message.find({roomName: message}).exec(function (err, messages) {
+        console.log("Roomname is "+ message);
         if (err)
             return console.error(err);
-        var toNotify = client?new Array(client):router.clients;
-        toNotify.forEach(function(socket){
+        router.clients.forEach(function(socket){
             socket.emit('refreshMessages', messages);
         })
     });
