@@ -5,7 +5,6 @@ import {Chat} from './chat.model';
 import {ChatService} from './../chat.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Chatroom} from "../chatroom/chatroom.model";
-import {ChatroomService} from "../chatroom.service.obsolete";
 
 @Component({
   selector: 'app-chat',
@@ -35,8 +34,6 @@ export class ChatComponent implements OnInit {
             listOfChatMessages => {
               //console.log("Messages:",messages);
               this.chatMessages = listOfChatMessages;
-              //console.log(this.chatMessages);
-              console.log(this.chatMessages);
             },
             error =>  this.chatMessages = <any>error
         );
@@ -46,7 +43,6 @@ export class ChatComponent implements OnInit {
 
   addChatMessage() {
     this.resetModel(this.model, this.model.message, this.model.author, this.selectedChatRoom);
-    console.log("Her er modellen: " + this.model);
     this.service.addChatMessage(this.model)
         .subscribe(
             user => {

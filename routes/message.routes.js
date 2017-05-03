@@ -10,17 +10,13 @@ var database = require('../model/database');
 /* POST single message */
 router.post('/post', function(req, res, next) {
     var instance = new schema.Message(req.body);
-    console.log("POST");
-    //console.log(instance);
 
     instance.save(function (err, Message) {
-        //console.log("Her er message: "+Message);
         result = err?err:Message;
         res.send(result);
         router.addMessage(req.body.roomName);
         return result;
     });
-
 });
 
 router.get('/get', function(req, res, next) {
@@ -45,19 +41,17 @@ router.get('/get/:roomName', function(req, res, next) {
 router.clients = [];
 router.addClient = function (client) {
     router.clients.push(client);
-    console.log("Clients indeholder: " + router.clients.length);
     //router.notifyclients(client);
 };
 
-router.addMessage = function (message) {
-    console.log("addMessage " + message);
-    router.notifyclientsMessage(message)
+router.addMessage = function (roomName) {
+    router.notifyclients(roomName);
 };
 
-router.notifyclientsMessage = function (message) {
-    console.log("notifyclientsmessage");
-    schema.Message.find({roomName: message}).exec(function (err, messages) {
-        console.log("Roomname is "+ message);
+
+router.notifyclients = function (roomName) {
+    schema.Message.find({roomName}).exec(function (err, messages) {
+        console.log("roomname is: " + roomName);
         if (err)
             return console.error(err);
         router.clients.forEach(function(socket){

@@ -78,18 +78,18 @@ server.on('error', onError);
 
  io.on('connection', function (socket) {
  console.log("New client connected");
-    /*socket.on('addUser', function(data) {
-
-    });*/
+    socket.on('addUser', function(data) {
+        user.addClient(socket);
+        user.notifyclients();
+    });
     socket.on('switchRoom', function(data) {
         console.log("switchroom "+data);
     });
-     message.addClient(socket);
-     //user.notifyclients();
     chatroom.addChatroom(socket);
     chatroom.notifyclients();
+ message.addClient(socket);
  //message.addMessage(socket);
- //message.notifyclients();
+ message.notifyclients();
  });
 
  server.on('listening', onListening);

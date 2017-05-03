@@ -13,14 +13,14 @@ export class ChatService {
     private getChatroomsUrl = 'chatroom/get';  // URL to web API
     private postChatroomUrl = 'chatroom/post';  // URL to web API
     constructor (private http: Http) {}
+    private socket;
     private url = window.location.origin;
-    private socket = io(this.url);
-
 
 
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
         let observable = new Observable(observer => {
             console.log("Socket:",this.url + selectedChatRoom);
+            this.socket = io(this.url);
             this.socket.on('refreshMessages', (data) => {
                 observer.next(data);
             });
@@ -49,10 +49,14 @@ export class ChatService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    /*
+     * Get blog messages from server
+     */
 
     getChatroomsFromServer(): Observable<Chatroom[]> {
         let observable = new Observable(observer => {
             console.log("Socket:",this.url);
+            this.socket = io(this.url);
             this.socket.on('refreshChat', (data) => {
                 observer.next(data);
             });
@@ -63,7 +67,7 @@ export class ChatService {
         });
         return observable;
     }
-
+    
 
     addChatroom(chatroom: Chatroom): Observable<Chatroom> {
         let headers = new Headers({ 'Content-Type': 'application/json' });

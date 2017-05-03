@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Chatroom} from './chatroom.model';
-import {ChatService} from '../chat.service';
+import {ChatService} from './../chat.service';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import * as io from 'socket.io-client';
-import {Chat} from "../chat/chat.model";
 
 @Component({
   selector: 'app-chatroom',
