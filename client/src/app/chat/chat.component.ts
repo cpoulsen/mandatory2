@@ -34,6 +34,17 @@ export class ChatComponent implements OnInit {
     return this.chatMessages;
   }
 
+    getInitialMessages(selectedChatRoom) {
+        this.service.getInitialMessages(selectedChatRoom)
+            .subscribe(
+                listOfChatMessages => {
+                    this.chatMessages = listOfChatMessages;
+                },
+                error =>  this.chatMessages = <any>error
+            );
+        return this.chatMessages;
+    }
+
 
   addChatMessage() {
     this.resetModel(this.model, this.model.message, this.model.author, this.selectedChatRoom);
@@ -55,6 +66,7 @@ export class ChatComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.selectedChatRoom = params['selectChatroom'];
     });
-          this.getChatMessages(this.selectedChatRoom);
+    this.getChatMessages(this.selectedChatRoom);
+    this.getInitialMessages(this.selectedChatRoom);
   }
 }

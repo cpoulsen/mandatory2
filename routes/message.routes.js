@@ -32,7 +32,6 @@ router.get('/get/:roomName', function(req, res, next) {
     schema.Message.find({roomName: req.params.roomName}).exec(function (err, messages) {
         if (err)
             return console.error(err);
-        console.log("Load success: ", messages);
         res.send(messages);
     });
 
@@ -41,7 +40,6 @@ router.get('/get/:roomName', function(req, res, next) {
 router.clients = [];
 router.addClient = function (client) {
     router.clients.push(client);
-    //router.notifyclients(client);
 };
 
 router.addMessage = function (roomName) {
@@ -50,7 +48,7 @@ router.addMessage = function (roomName) {
 
 
 router.notifyclients = function (roomName) {
-    schema.Message.find({roomName}).exec(function (err, messages) {
+    schema.Message.find({roomName: roomName}).exec(function (err, messages) {
         if (err)
             return console.error(err);
         router.clients.forEach(function(socket){

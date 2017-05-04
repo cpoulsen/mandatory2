@@ -13,8 +13,8 @@ export class ChatService {
     private getChatroomsUrl = 'chatroom/get';  // URL to web API
     private postChatroomUrl = 'chatroom/post';  // URL to web API
     constructor (private http: Http) {}
-    private socket;
     private url = window.location.origin;
+    private socket;
 
 
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
@@ -29,6 +29,12 @@ export class ChatService {
             };
         });
         return observable;
+    }
+
+    getInitialMessages(selectedChatRoom): Observable<Chat[]> {
+        return this.http.get(this.getChatUrl + '/' + selectedChatRoom)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
 

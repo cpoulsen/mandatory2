@@ -84,7 +84,6 @@ server.listen(port);
 server.on('error', onError);
 
  io.on('connection', function (socket) {
- console.log("New client connected");
     socket.on('addUser', function(data) {
         user.addClient(socket);
         user.notifyclients();
@@ -93,8 +92,6 @@ server.on('error', onError);
     chatroom.addChatroom(socket);
     chatroom.notifyclients();
     message.addClient(socket);
- //message.addMessage(socket);
- //message.notifyclients();
  });
 
  server.on('listening', onListening);
