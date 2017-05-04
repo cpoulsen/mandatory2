@@ -19,7 +19,6 @@ export class ChatService {
 
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
         let observable = new Observable(observer => {
-            console.log("Socket:",this.url + selectedChatRoom);
             this.socket = io(this.url);
             this.socket.on('refreshMessages', (data) => {
                 observer.next(data);
@@ -32,14 +31,6 @@ export class ChatService {
         return observable;
     }
 
-    /*
-    getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
-        this.getChatUrl = 'message/get/'+selectedChatRoom
-        return this.http.get(this.getChatUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-    */
 
     addChatMessage(chat: Chat): Observable<Chat> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -55,7 +46,6 @@ export class ChatService {
 
     getChatroomsFromServer(): Observable<Chatroom[]> {
         let observable = new Observable(observer => {
-            console.log("Socket:",this.url);
             this.socket = io(this.url);
             this.socket.on('refreshChat', (data) => {
                 observer.next(data);
@@ -83,11 +73,9 @@ export class ChatService {
      */
     private extractData(res: Response) {
         let body = res.json();
-        //console.log(body);
         return body || { };
     }
     private handleError (error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
@@ -96,7 +84,6 @@ export class ChatService {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        //console.log(errMsg);
         return Observable.throw(errMsg);
     }
 }

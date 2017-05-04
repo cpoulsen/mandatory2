@@ -3,7 +3,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {User} from "./login/user.model";
-import * as io from 'socket.io-client';
 
 @Injectable()
 export class UserService {
@@ -22,21 +21,6 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    /*getUsersFromServer(): Observable<User[]> {
-        let observable = new Observable(observer => {
-            console.log("Socket:",this.url);
-            this.socket = io(this.url);
-            this.socket.on('refresh', (data) => {
-                observer.next(data);
-            });
-
-            return () => {
-                this.socket.disconnect();
-            };
-        });
-        return observable;
-    }*/
-
     addUser (user: User): Observable<User> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -51,7 +35,6 @@ export class UserService {
      */
     private extractData(res: Response) {
         let body = res.json();
-        //console.log(body);
         return body || { };
     }
     private handleError (error: Response | any) {
@@ -64,7 +47,6 @@ export class UserService {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        //console.log(errMsg);
         return Observable.throw(errMsg);
     }
 }

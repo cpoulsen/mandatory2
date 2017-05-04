@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User} from './user.model';
 import {UserService} from './../user.service';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,20 +13,17 @@ export class LoginComponent implements OnInit {
   private users: User[] = [];
   public userList = this.users;
   title = 'MEAN app with Angular2';
-  model = new User("");
+  model = new User('');
 
   constructor(
-      private service: UserService
-      /*private logger: Logger*/) {
+      private service: UserService) {
   }
 
   getUsers() {
     this.service.getUsersFromServer()
         .subscribe(
             listOfUsers => {
-              //console.log("Messages:",messages);
               this.users = listOfUsers;
-              console.log(this.users);
             },
             error =>  this.users = <any>error
         );
@@ -50,22 +43,9 @@ export class LoginComponent implements OnInit {
     }
 
     resetModel(userModel, userModelUsername) {
-        userModel= new User(userModelUsername)
-        this.model = userModel
+        userModel = new User(userModelUsername);
+        this.model = userModel;
     }
-
-/*  checkLogin(username, password) {
-    console.log("Subscribe to service");
-    this.service.getUsersFromServer()
-        .subscribe(
-            listOfUsers => {
-              //console.log("Messages:",messages);
-              this.users = listOfUsers;
-            },
-            error =>  this.users = <any>error
-        );
-    return;
-  }*/
 
   ngOnInit() {
     this.getUsers();
