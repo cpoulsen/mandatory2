@@ -50,11 +50,6 @@ export class ChatroomComponent implements OnInit {
     this.model = chatroomModel
   }
 
-  switchRoom(roomName) {
-      this.socket.emit('switchRoom', roomName);
-      this.socket.join(roomName);
-  }
-
   ngOnInit() {
     this.getChatrooms();
     this.socket = io.connect(window.location.origin);
