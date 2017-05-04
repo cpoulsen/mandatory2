@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public userList = this.users;
   title = 'MEAN app with Angular2';
   model = new User('');
+  feedback;
 
   constructor(
       private service: UserService,
@@ -32,7 +33,30 @@ export class LoginComponent implements OnInit {
     return this.users;
   }
 
-    addUser() {
+
+  loginUser(username) {
+      this.resetModel(this.model, this.model.username);
+      this.service.loginUser(username)
+          .subscribe(
+              feedback => {
+                  if (feedback.length === 1) {
+                      this.feedback = 'Username already in use';
+                  } else {
+                          this.resetModel(this.model, this.model.username);
+                          this.service.addUser(this.model)
+                              .subscribe(
+                                  user => {
+                                      this.model = user;
+                                      this.getUsers();
+                                  },
+                                  error =>  this.title = <any>error
+                              );
+                          this.router.navigate(['./chatroom']);
+                  }
+              }
+          );
+  }
+    /*addUser() {
         this.resetModel(this.model, this.model.username);
         this.service.addUser(this.model)
             .subscribe(
@@ -43,7 +67,7 @@ export class LoginComponent implements OnInit {
                 error =>  this.title = <any>error
             );
         this.router.navigate(['./chatroom']);
-    }
+    }*/
 
     resetModel(userModel, userModelUsername) {
         userModel = new User(userModelUsername);

@@ -11,7 +11,7 @@
   <div class="col-md-4">
     <h1 class="h1-custom">Login</h1>
     <div id="userSubmitForm">
-      <form (ngSubmit)="addUser()" class="form-horizontal">
+      <form (ngSubmit)="loginUser(model.username)" class="form-horizontal">
         <div class="form-group">
           <label for="author">Enter an unqiue username</label>
           <div class="input-group">
@@ -19,8 +19,10 @@
                    placeholder="Username">
             <span class="input-group-btn">
                 <input class="btn btn-success" id="login-btn" type="submit" value="Login"/>
-        </span>
+            </span>
           </div>
+          <br/>
+          <label id="invalid" class="text-center">{{feedback}}</label>
         </div>
       </form>
     </div>

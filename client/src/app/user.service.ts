@@ -8,6 +8,7 @@ import {User} from "./login/user.model";
 export class UserService {
     private getUsersUrl = 'user/get';  // URL to web API
     private postUsersUrl = 'user/post';  // URL to web API
+    private authenticateUserUrl = 'user/auth/';
     constructor (private http: Http) {}
     private socket;
     private url = window.location.origin;
@@ -20,6 +21,12 @@ export class UserService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+
+    loginUser(username): Observable<User[]> {
+        return this.http.post(this.authenticateUserUrl + 'user', {username: username})
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
 
     addUser (user: User): Observable<User> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
