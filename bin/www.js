@@ -89,14 +89,12 @@ server.on('error', onError);
         user.addClient(socket);
         user.notifyclients();
     });
-    socket.on('switchRoom', function(data) {
-        console.log("switchroom "+data);
-    });
+
     chatroom.addChatroom(socket);
     chatroom.notifyclients();
- message.addClient(socket);
+    message.addClient(socket);
  //message.addMessage(socket);
- message.notifyclients();
+ //message.notifyclients();
  });
 
  server.on('listening', onListening);
