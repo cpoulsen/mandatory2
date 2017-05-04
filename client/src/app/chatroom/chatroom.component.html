@@ -6,11 +6,7 @@
       <button type="button" class="list-group-item" *ngFor="let chatroom of chatrooms">
         <a [routerLink]="[chatroom.roomName]" routerLinkActive="active">{{chatroom.roomName}}</a>
       </button>
-      <button type="button" class="list-group-item">
-        <a routerLink="/chatroom" routerLinkActive="active">New chatroom <span class="glyphicon glyphicon-plus"></span></a>
-      </button>
     </div>
-    <router-outlet></router-outlet>
   </div>
   <div class="col-md-6">
     <h2>Create new Chatroom</h2>

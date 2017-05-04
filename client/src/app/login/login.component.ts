@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from './user.model';
 import {UserService} from './../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   model = new User('');
 
   constructor(
-      private service: UserService) {
+      private service: UserService,
+      private router: Router) {
   }
 
   getUsers() {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
                 },
                 error =>  this.title = <any>error
             );
+        this.router.navigate(['./chatroom']);
     }
 
     resetModel(userModel, userModelUsername) {

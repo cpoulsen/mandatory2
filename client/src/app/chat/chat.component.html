@@ -1,7 +1,9 @@
-
 <div class="container-fluid" id="indexContainer">
   <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-3">
+      <a routerLink="/chatroom" class="btn btn-info" routerLinkActive="active">Back</a>
+    </div>
+  <div class="col-md-6">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">{{selectedChatRoom}}</h3>
@@ -14,7 +16,6 @@
               <h3 class="panel-title">{{chatMessage.author}}</h3>
             </div>
             <div class="panel-body">
-              {{chatMessage.roomName}}
               {{chatMessage.message}}
             </div>
           </div>
@@ -30,7 +31,7 @@
              required
              [(ngModel)]="model.message" name="message">
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">Send</button>
   </form>
   </div>
   </div>
