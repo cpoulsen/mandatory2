@@ -20,12 +20,13 @@ export class ChatService {
     getChatMessagesFromServer(selectedChatRoom): Observable<Chat[]> {
         let observable = new Observable(observer => {
             this.socket = io(this.url);
+            this.socket.emit('newConnection', selectedChatRoom);
             this.socket.on('refreshMessages', (data) => {
                 observer.next(data);
             });
 
             return () => {
-                this.socket.disconnect();
+                    this.socket.disconnect();
             };
         });
         return observable;
@@ -42,6 +43,8 @@ export class ChatService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
+
+
         return this.http.post(this.postChatUrl, chat, options)
             .map(this.extractData)
             .catch(this.handleError);
@@ -50,7 +53,13 @@ export class ChatService {
      * Get blog messages from server
      */
 
-    getChatroomsFromServer(): Observable<Chatroom[]> {
+    getChatroomsFromServer(): Observable<Chat[]> {
+        return this.http.get(this.getChatroomsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    /*getChatroomsFromServer(): Observable<Chatroom[]> {
         let observable = new Observable(observer => {
             this.socket = io(this.url);
             this.socket.on('refreshChat', (data) => {
@@ -62,7 +71,7 @@ export class ChatService {
             };
         });
         return observable;
-    }
+    }*/
     
 
     addChatroom(chatroom: Chatroom): Observable<Chatroom> {

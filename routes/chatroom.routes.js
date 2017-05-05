@@ -10,7 +10,6 @@ var database = require('../model/database');
 /* POST chatroom */
 router.post('/post', function(req, res, next) {
     var instance = new schema.ChatRoom(req.body);
-
     instance.save(function (err, ChatRoom) {
         result = err?err:ChatRoom;
         res.send(result);
@@ -28,7 +27,7 @@ router.get('/get', function(req, res, next) {
 
 });
 
-router.clients = [];
+/*router.clients = [];
 router.addChatroom = function (client) {
     router.clients.push(client);
     router.notifyclients(client);
@@ -44,7 +43,7 @@ router.notifyclients = function (client) {
             socket.emit('refreshChat', chatRooms);
         })
     });
-}
+}*/
 
 //export the router
 module.exports = router;

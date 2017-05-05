@@ -15,7 +15,6 @@ export class ChatroomComponent implements OnInit {
   private chatrooms: Chatroom[] = [];
   title = 'MEAN app with Angular2';
   model = new Chatroom('');
-  socket;
 
   constructor(
       private service: ChatService) {
@@ -52,7 +51,6 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit() {
     this.getChatrooms();
-    this.socket = io.connect(window.location.origin);
 
     
   }

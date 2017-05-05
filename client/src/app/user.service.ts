@@ -10,8 +10,7 @@ export class UserService {
     private postUsersUrl = 'user/post';  // URL to web API
     private authenticateUserUrl = 'user/auth/';
     constructor (private http: Http) {}
-    private socket;
-    private url = window.location.origin;
+
 
     /*
      * Get blog messages from server

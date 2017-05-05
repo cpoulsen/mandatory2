@@ -38,7 +38,8 @@ router.get('/get/:roomName', function(req, res, next) {
 });
 
 router.clients = [];
-router.addClient = function (client) {
+router.addClient = function (client, data) {
+    client.id = data;
     router.clients.push(client);
 };
 
@@ -52,7 +53,12 @@ router.notifyclients = function (roomName) {
         if (err)
             return console.error(err);
         router.clients.forEach(function(socket){
-            socket.emit('refreshMessages', messages);
+            console.log(socket.id);
+            if(socket.id == roomName) {
+                console.log(socket.id);
+                socket.emit('refreshMessages', messages);
+            }
+//            socket.to(roomName).emit('refreshMessages', messages);
         })
     });
 }
