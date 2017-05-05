@@ -55,10 +55,8 @@ router.notifyclients = function (roomName) {
         router.clients.forEach(function(socket){
             console.log(socket.id);
             if(socket.id == roomName) {
-                console.log(socket.id);
                 socket.emit('refreshMessages', messages);
             }
-//            socket.to(roomName).emit('refreshMessages', messages);
         })
     });
 }

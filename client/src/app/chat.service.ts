@@ -58,20 +58,6 @@ export class ChatService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
-    /*getChatroomsFromServer(): Observable<Chatroom[]> {
-        let observable = new Observable(observer => {
-            this.socket = io(this.url);
-            this.socket.on('refreshChat', (data) => {
-                observer.next(data);
-            });
-
-            return () => {
-                this.socket.disconnect();
-            };
-        });
-        return observable;
-    }*/
     
 
     addChatroom(chatroom: Chatroom): Observable<Chatroom> {

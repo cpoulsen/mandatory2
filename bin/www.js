@@ -84,14 +84,6 @@ server.listen(port);
 server.on('error', onError);
 
  io.on('connection', function (socket) {
-/*    socket.on('addUser', function(data) {
-        user.addClient(socket);
-        user.notifyclients();
-    });*/
-
-    //chatroom.addChatroom(socket);
-    //chatroom.notifyclients();
-
      socket.on('newConnection', function(data) {
          console.log("newConnection " + data);
          message.addClient(socket, data);
